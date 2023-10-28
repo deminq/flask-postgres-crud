@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Record</title>
+</head>
+<body>
+    <h1>Update Record</h1>
+    <form method="POST" action="/update/{{ record[0] }}">
+        Name: <input type="text" name="name" value="{{ record[1] }}"><br>
+        Email: <input type="text" name="email" value="{{ record[2] }}"><br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

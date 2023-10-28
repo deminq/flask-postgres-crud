@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD with Flask and PostgreSQL</title>
+    <script>
+        function toggleUpdateForm(id) {
+            var form = document.getElementById('update-form-' + id);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+   
+
+    <h2>Create Record</h2>
+    <form method="POST" action="/create">
+        Name: <input type="text" name="name"><br>
+        Email: <input type="text" name="email"><br>
+        <input type="submit" value="Create">
+    </form>
+
+    <h2>Records</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        {% for record in data %}
+        <tr>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>
+                <a href="#" onclick="toggleUpdateForm({{ record[0] }}); return false;">Edit</a> |
+                <a href="/delete/{{ record[0] }}">Delete</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <form id="update-form-{{ record[0] }}" method="POST" action="/update/{{ record[0] }}" style="display: none;">
+                    Name: <input type="text" name="name" value="{{ record[1] }}"><br>
+                    Email: <input type="text" name="email" value="{{ record[2] }}"><br>
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
